@@ -2,7 +2,6 @@ package unitins.topicos.resource;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
@@ -19,34 +18,34 @@ import javax.ws.rs.core.Response.Status;
 import com.oracle.svm.core.annotate.Delete;
 
 import unitins.topicos.application.Result;
-import unitins.topicos.dto.EstadoDTO;
-import unitins.topicos.dto.EstadoResponseDTO;
-import unitins.topicos.service.EstadoService;
+import unitins.topicos.dto.TelefoneDTO;
+import unitins.topicos.dto.TelefoneResponseDTO;
+import unitins.topicos.service.TelefoneService;
 
-@Path("/estados")
+@Path("/telefone")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class EstadoResource {
+public class TelefoneResource {
 
 	@Inject
-	EstadoService estadoService;
+	TelefoneService telefoneService;
 
 	@GET
-	public List<EstadoResponseDTO> getAll() {
-		return estadoService.getAll();
+	public List<TelefoneResponseDTO> getAll() {
+		return telefoneService.getAll();
 	}
 
 	@GET
 	@Path("/{id}")
-	public EstadoResponseDTO findById(@PathParam("id") Long id) {
-		return estadoService.findById(id);
+	public TelefoneResponseDTO findById(@PathParam("id") Long id) {
+		return telefoneService.findById(id);
 	}
 
 	@POST
-	public Response insert(EstadoDTO dto) {
+	public Response insert(TelefoneDTO dto) {
 		try {
-			EstadoResponseDTO estado = estadoService.create(dto);
-			return Response.status(Status.CREATED).entity(estado).build();
+			TelefoneResponseDTO telefone = telefoneService.create(dto);
+			return Response.status(Status.CREATED).entity(telefone).build();
 		} catch (ConstraintViolationException e) {
 			Result result = new Result(e.getConstraintViolations());
 			return Response.status(Status.NOT_FOUND).entity(result).build();
@@ -55,9 +54,9 @@ public class EstadoResource {
 
 	@PUT
 	@Path("/{id}")
-	public Response update(@PathParam("id") Long id, EstadoDTO dto) {
+	public Response update(@PathParam("id") Long id, TelefoneDTO dto) {
 		try {
-			EstadoResponseDTO municipio = estadoService.update(id, dto);
+			TelefoneResponseDTO municipio = telefoneService.update(id, dto);
 			return Response.ok(municipio).build();
 		} catch (ConstraintViolationException e) {
 			Result result = new Result(e.getConstraintViolations());
@@ -68,20 +67,20 @@ public class EstadoResource {
 	@Delete
 	@Path("/{id}")
 	public Response delete(@PathParam("id") Long id) {
-		estadoService.delete(id);
+		telefoneService.delete(id);
 		return Response.status(Status.NO_CONTENT).build();
 	}
 
 	@GET
 	@Path("/count")
 	public long count() {
-		return estadoService.count();
+		return telefoneService.count();
 	}
 
 	@GET
 	@Path("/search/{nome}")
-	public List<EstadoResponseDTO> search(@PathParam("nome") String nome) {
-		return estadoService.findByNome(nome);
+	public List<TelefoneResponseDTO> search(@PathParam("nome") String nome) {
+		return telefoneService.findByNome(nome);
 
 	}
 }

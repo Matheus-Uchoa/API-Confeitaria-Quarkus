@@ -27,3 +27,9 @@ insert into Endereco (principal, logradouro, bairro, numero, complemento, cep, i
 insert into Endereco (principal, logradouro, bairro, numero, complemento, cep, id_municipio) values(false,'lograteste','bairroteste','123','completeste','44543-232','3');
 insert into Endereco (principal, logradouro, bairro, numero, complemento, cep, id_municipio) values(true,'lograteste','bairroteste','123','completeste','44543-232','4');
 
+insert into Telefone(codigoArea, numero) values('62','987433723');
+insert into Telefone(codigoArea, numero) values('98','789234109');
+insert into Telefone(codigoArea, numero) values('63','983617342');
+insert into Telefone(codigoArea, numero) values('74','934812347');
+insert into Telefone(codigoArea, numero) values('11','923741342');
+
