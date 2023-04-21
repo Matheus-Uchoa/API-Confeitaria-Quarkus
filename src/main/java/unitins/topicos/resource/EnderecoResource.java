@@ -2,7 +2,6 @@ package unitins.topicos.resource;
 
 import java.util.List;
 
-
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
@@ -18,34 +17,35 @@ import javax.ws.rs.core.Response.Status;
 
 import com.oracle.svm.core.annotate.Delete;
 
-import unitins.topicos.dto.MunicipioDto;
-import unitins.topicos.dto.MunicipioResponseDTO;
-import unitins.topicos.service.MunicipioService;
 import unitins.topicos.application.Result;
+import unitins.topicos.dto.EnderecoResponseDTO;
+import unitins.topicos.dto.EnderecoDTO;
+import unitins.topicos.dto.EnderecoResponseDTO;
+import unitins.topicos.service.EnderecoService;
 
-@Path("/municipios")
+@Path("/endereco")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class MunicipioResource {
+public class EnderecoResource {
 
 	@Inject
-	MunicipioService municipioService;
+	EnderecoService enderecoService;
 
 	@GET
-	public List<MunicipioResponseDTO> getAll() {
-		return municipioService.getAll();
+	public List<EnderecoResponseDTO> getAll() {
+		return enderecoService.getAll();
 	}
 
 	@GET
 	@Path("/{id}")
-	public MunicipioResponseDTO findById(@PathParam("id") Long id) {
-		return municipioService.findById(id);
+	public EnderecoResponseDTO findById(@PathParam("id") Long id) {
+		return enderecoService.findById(id);
 	}
 
 	@POST
-	public Response insert(MunicipioDto dto) {
+	public Response insert(EnderecoDTO dto) {
 		try {
-			MunicipioResponseDTO municipio = municipioService.create(dto);
+			EnderecoResponseDTO municipio = enderecoService.create(dto);
 			return Response.status(Status.CREATED).entity(municipio).build();
 		} catch (ConstraintViolationException e) {
 			Result result = new Result(e.getConstraintViolations());
@@ -55,9 +55,9 @@ public class MunicipioResource {
 
 	@PUT
 	@Path("/{id}")
-	public Response update(@PathParam("id") Long id, MunicipioDto dto) {
+	public Response update(@PathParam("id") Long id, EnderecoDTO dto) {
 		try {
-			MunicipioResponseDTO municipio = municipioService.update(id, dto);
+			EnderecoResponseDTO municipio = enderecoService.update(id, dto);
 			return Response.ok(municipio).build();
 		} catch (ConstraintViolationException e) {
 			Result result = new Result(e.getConstraintViolations());
@@ -68,20 +68,20 @@ public class MunicipioResource {
 	@Delete
 	@Path("/{id}")
 	public Response delete(@PathParam("id") Long id) {
-		municipioService.delete(id);
+		enderecoService.delete(id);
 		return Response.status(Status.NO_CONTENT).build();
 	}
 
 	@GET
 	@Path("/count")
 	public long count() {
-		return municipioService.count();
+		return enderecoService.count();
 	}
 
 	@GET
 	@Path("/search/{nome}")
-	public List<MunicipioResponseDTO> search(@PathParam("nome") String nome) {
-		return municipioService.findByNome(nome);
+	public List<EnderecoResponseDTO> search(@PathParam("nome") String nome) {
+		return enderecoService.findByNome(nome);
 
 	}
 }
