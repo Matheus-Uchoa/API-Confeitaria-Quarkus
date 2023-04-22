@@ -3,6 +3,9 @@ package unitins.topicos.repository;
 import java.util.List;
 
 
+
+
+
 import javax.enterprise.context.ApplicationScoped;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;

@@ -3,6 +3,7 @@ package unitins.topicos.service;
 import java.util.List;
 
 
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ import javax.validation.Validator;
 import javax.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.MunicipioResponseDTO;
-import unitins.topicos.dto.MunicipioDto;
+import unitins.topicos.dto.MunicipioDTO;
 import unitins.topicos.entity.MunicipioEntity;
 import unitins.topicos.repository.EstadoRepository;
 import unitins.topicos.repository.MunicipioRepository;
@@ -45,7 +46,7 @@ public class MunicipioService {
 	}
 
 	@Transactional
-	public MunicipioResponseDTO create(MunicipioDto municipioDto) throws ConstraintViolationException {
+	public MunicipioResponseDTO create(MunicipioDTO municipioDto) throws ConstraintViolationException {
 		validar(municipioDto);
 
 		MunicipioEntity entity = new MunicipioEntity();
@@ -57,7 +58,7 @@ public class MunicipioService {
 	}
 
 	@Transactional
-	public MunicipioResponseDTO update(Long id, MunicipioDto municipioDTO) throws ConstraintViolationException {
+	public MunicipioResponseDTO update(Long id, MunicipioDTO municipioDTO) throws ConstraintViolationException {
 		validar(municipioDTO);
 
 		MunicipioEntity entity = municipioRepository.findById(id);
@@ -68,8 +69,8 @@ public class MunicipioService {
 		return new MunicipioResponseDTO(entity);
 	}
 
-	private void validar(MunicipioDto municipioDTO) throws ConstraintViolationException {
-		Set<ConstraintViolation<MunicipioDto>> violations = validator.validate(municipioDTO);
+	private void validar(MunicipioDTO municipioDTO) throws ConstraintViolationException {
+		Set<ConstraintViolation<MunicipioDTO>> violations = validator.validate(municipioDTO);
 		if (!violations.isEmpty())
 			throw new ConstraintViolationException(violations);
 

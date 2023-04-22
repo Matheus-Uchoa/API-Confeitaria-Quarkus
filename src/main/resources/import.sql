@@ -6,10 +6,7 @@
 
 
 
-insert into Usuario (nome, email,senha,cpf) values('tifu','tifu@email.com', '123', '123.321.23-08');
-insert into Usuario (nome, email,senha,cpf) values('meive','meive@email.com', '321', '123.321.23-04');
-insert into Usuario (nome, email,senha,cpf) values('Livia','livia@email.com', '2606', '123.331.23-08');
-insert into Usuario (nome, email,senha,cpf) values('Ledrus','ledrus@email.com', '234', '123.333.23-08');
+
 
 
 insert into Estado (nome, sigla) values ('Tocantins','TO');
@@ -33,3 +30,28 @@ insert into Telefone(codigoArea, numero) values('63','983617342');
 insert into Telefone(codigoArea, numero) values('74','934812347');
 insert into Telefone(codigoArea, numero) values('11','923741342');
 
+insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('tifu','tifu@email.com', '123', '123.321.23-08',1,4);
+insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('meive','meive@email.com', '321', '123.321.23-04',2,3);
+insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('Livia','livia@email.com', '2606', '123.331.23-08',3,2);
+insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('Ledrus','ledrus@email.com', '234', '123.333.23-08',4,1);
+
+INSERT INTO alergenico(descricao) VALUES ('Láctose');
+INSERT INTO alergenico(descricao) VALUES ('Glúten');
+INSERT INTO alergenico(descricao) VALUES ('Amendoim');
+INSERT INTO alergenico(descricao) VALUES ('Avelã');
+
+INSERT INTO ingrediente(nome) VALUES ('Farinha de Trigo');
+INSERT INTO ingrediente(nome) VALUES ('Leite');
+INSERT INTO ingrediente(nome) VALUES ('Chocolate');
+INSERT INTO ingrediente(nome) VALUES ('Queijo');
+
+INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Bolo recheado com Chocolate trufado', 12, 'Bolo bom', 123);
+INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Torta de limão taiti', 11, 'Torta limo', 50);
+INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Biscoito com cobertura e gota de chocolate',54, 'Biscoito bom', 8);
+INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Rocambole de nutella', 232, 'Rocambella', 12312123123);
+
+
+INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (1, 23, 1, 1);
+INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (2, 4, 2, 2);
+INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (3, 3, 3, 3);
+INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (4, 2, 4, 4);

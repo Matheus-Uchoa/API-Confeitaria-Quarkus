@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,10 +29,22 @@ public class UsuarioEntity {
 
 	@Column(nullable = false)
 	private String cpf;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_endereco")
 	private EnderecoEntity endereco;
+
+	@OneToOne
+	@JoinColumn(name = "id_telefone")
+	private TelefoneEntity telefone;
+
+	public TelefoneEntity getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(TelefoneEntity telefone) {
+		this.telefone = telefone;
+	}
 
 	public Long getId() {
 		return id;
@@ -80,9 +93,6 @@ public class UsuarioEntity {
 	public void setEndereco(EnderecoEntity endereco) {
 		this.endereco = endereco;
 	}
-
-
-
 
 	/*
 	 * @OneToOne

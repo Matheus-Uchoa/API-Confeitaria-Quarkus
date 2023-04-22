@@ -2,6 +2,8 @@ package unitins.topicos.resource;
 
 import java.util.List;
 
+
+
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;

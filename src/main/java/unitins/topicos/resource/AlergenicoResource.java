@@ -2,8 +2,6 @@ package unitins.topicos.resource;
 
 import java.util.List;
 
-
-
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
@@ -19,35 +17,35 @@ import javax.ws.rs.core.Response.Status;
 
 import com.oracle.svm.core.annotate.Delete;
 
-import unitins.topicos.dto.MunicipioDTO;
-import unitins.topicos.dto.MunicipioResponseDTO;
-import unitins.topicos.service.MunicipioService;
 import unitins.topicos.application.Result;
+import unitins.topicos.dto.AlergenicoResponseDTO;
+import unitins.topicos.dto.AlergenicoDTO;
+import unitins.topicos.service.AlergenicoService;
 
-@Path("/municipios")
+@Path("/alergenico")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class MunicipioResource {
+public class AlergenicoResource {
 
 	@Inject
-	MunicipioService municipioService;
+	AlergenicoService alergenicoService;
 
 	@GET
-	public List<MunicipioResponseDTO> getAll() {
-		return municipioService.getAll();
+	public List<AlergenicoResponseDTO> getAll() {
+		return alergenicoService.getAll();
 	}
 
 	@GET
 	@Path("/{id}")
-	public MunicipioResponseDTO findById(@PathParam("id") Long id) {
-		return municipioService.findById(id);
+	public AlergenicoResponseDTO findById(@PathParam("id") Long id) {
+		return alergenicoService.findById(id);
 	}
 
 	@POST
-	public Response insert(MunicipioDTO dto) {
+	public Response insert(AlergenicoDTO dto) {
 		try {
-			MunicipioResponseDTO municipio = municipioService.create(dto);
-			return Response.status(Status.CREATED).entity(municipio).build();
+			AlergenicoResponseDTO alergenico = alergenicoService.create(dto);
+			return Response.status(Status.CREATED).entity(alergenico).build();
 		} catch (ConstraintViolationException e) {
 			Result result = new Result(e.getConstraintViolations());
 			return Response.status(Status.NOT_FOUND).entity(result).build();
@@ -56,9 +54,9 @@ public class MunicipioResource {
 
 	@PUT
 	@Path("/{id}")
-	public Response update(@PathParam("id") Long id, MunicipioDTO dto) {
+	public Response update(@PathParam("id") Long id, AlergenicoDTO dto) {
 		try {
-			MunicipioResponseDTO municipio = municipioService.update(id, dto);
+			AlergenicoResponseDTO municipio = alergenicoService.update(id, dto);
 			return Response.ok(municipio).build();
 		} catch (ConstraintViolationException e) {
 			Result result = new Result(e.getConstraintViolations());
@@ -69,20 +67,20 @@ public class MunicipioResource {
 	@Delete
 	@Path("/{id}")
 	public Response delete(@PathParam("id") Long id) {
-		municipioService.delete(id);
+		alergenicoService.delete(id);
 		return Response.status(Status.NO_CONTENT).build();
 	}
 
 	@GET
 	@Path("/count")
 	public long count() {
-		return municipioService.count();
+		return alergenicoService.count();
 	}
 
 	@GET
 	@Path("/search/{nome}")
-	public List<MunicipioResponseDTO> search(@PathParam("nome") String nome) {
-		return municipioService.findByNome(nome);
+	public List<AlergenicoResponseDTO> search(@PathParam("nome") String nome) {
+		return alergenicoService.findByNome(nome);
 
 	}
 }

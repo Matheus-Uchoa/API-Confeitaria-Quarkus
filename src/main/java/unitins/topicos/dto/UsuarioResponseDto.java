@@ -2,17 +2,18 @@ package unitins.topicos.dto;
 
 import unitins.topicos.entity.UsuarioEntity;
 
-public record UsuarioResponseDto(
+public record UsuarioResponseDTO(
 
 		String nome,
 
 		String email, String senha,
 
-		String cpf
+		String cpf, Long idEndereco, Long idTelefone
 
 ) {
-	public UsuarioResponseDto(UsuarioEntity usuario) {
-		this(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf());
+	public UsuarioResponseDTO(UsuarioEntity usuario) {
+		this(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf(), usuario.getEndereco().getId(),
+				usuario.getTelefone().getId());
 	}
 
 }

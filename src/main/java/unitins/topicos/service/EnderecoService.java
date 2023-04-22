@@ -14,7 +14,7 @@ import javax.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.EnderecoDTO;
 import unitins.topicos.dto.EnderecoResponseDTO;
-import unitins.topicos.dto.MunicipioDto;
+import unitins.topicos.dto.MunicipioDTO;
 import unitins.topicos.dto.MunicipioResponseDTO;
 import unitins.topicos.entity.EnderecoEntity;
 import unitins.topicos.entity.MunicipioEntity;
