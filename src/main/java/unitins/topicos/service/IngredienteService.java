@@ -1,6 +1,7 @@
 package unitins.topicos.service;
 
 import java.util.List;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,9 @@ import javax.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.IngredienteDTO;
 import unitins.topicos.dto.IngredienteResponseDTO;
-import unitins.topicos.dto.MunicipioResponseDTO;
+
 import unitins.topicos.entity.IngredienteEntity;
-import unitins.topicos.entity.MunicipioEntity;
+
 import unitins.topicos.repository.IngredienteRepository;
 
 @ApplicationScoped

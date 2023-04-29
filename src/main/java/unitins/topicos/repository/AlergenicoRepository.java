@@ -10,10 +10,10 @@ import unitins.topicos.entity.AlergenicoEntity;
 @ApplicationScoped
 public class AlergenicoRepository implements PanacheRepository<AlergenicoEntity> {
 
-	public List<AlergenicoEntity> findByNome(String nome) {
-		if (nome == null)
+	public List<AlergenicoEntity> findByNome(String descricao) {
+		if (descricao == null)
 			return null;
-		return find("UPPER(nome) LIKE ?1 ", "%" + nome.toUpperCase() + "%").list();
+		return find("UPPER(descricao) LIKE ?1 ", "%" + descricao.toUpperCase() + "%").list();
 	}
 
 }

@@ -1,6 +1,7 @@
 package unitins.topicos.service;
 
 import java.util.List;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,10 +15,9 @@ import javax.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.EnderecoDTO;
 import unitins.topicos.dto.EnderecoResponseDTO;
-import unitins.topicos.dto.MunicipioDTO;
-import unitins.topicos.dto.MunicipioResponseDTO;
+
 import unitins.topicos.entity.EnderecoEntity;
-import unitins.topicos.entity.MunicipioEntity;
+
 import unitins.topicos.repository.EnderecoRepository;
 import unitins.topicos.repository.MunicipioRepository;
 
@@ -90,8 +90,8 @@ public class EnderecoService {
 		enderecoRepository.deleteById(id);
 	}
 
-	public List<EnderecoResponseDTO> findByNome(String nome) {
-		List<EnderecoEntity> list = enderecoRepository.findByNome(nome);
+	public List<EnderecoResponseDTO> findByCep(String cep) {
+		List<EnderecoEntity> list = enderecoRepository.findByCep(cep);
 		return list.stream().map(EnderecoResponseDTO::new).collect(Collectors.toList());
 	}
 

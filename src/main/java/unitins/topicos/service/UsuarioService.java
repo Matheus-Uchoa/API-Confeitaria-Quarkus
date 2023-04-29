@@ -1,6 +1,8 @@
 package unitins.topicos.service;
 
 import java.util.List;
+
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,10 +15,9 @@ import javax.validation.Validator;
 import javax.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.UsuarioDTO;
-import unitins.topicos.dto.MunicipioResponseDTO;
-import unitins.topicos.dto.UsuarioDTO;
+
 import unitins.topicos.dto.UsuarioResponseDTO;
-import unitins.topicos.entity.MunicipioEntity;
+
 import unitins.topicos.entity.UsuarioEntity;
 import unitins.topicos.repository.EnderecoRepository;
 import unitins.topicos.repository.TelefoneRepository;
@@ -58,6 +59,7 @@ public class UsuarioService {
 		entity.setEmail(usuarioDTO.email());
 		entity.setSenha(usuarioDTO.senha());
 		entity.setEmail(usuarioDTO.email());
+		entity.setCpf(usuarioDTO.cpf());
 		entity.setTelefone(telefoneRepository.findById(usuarioDTO.idTelefone()));
 		entity.setEndereco(enderecoRepository.findById(usuarioDTO.idEndereco()));
 
@@ -76,6 +78,7 @@ public class UsuarioService {
 		entity.setEmail(usuarioDTO.email());
 		entity.setSenha(usuarioDTO.senha());
 		entity.setEmail(usuarioDTO.email());
+		entity.setCpf(usuarioDTO.cpf());
 		entity.setTelefone(telefoneRepository.findById(usuarioDTO.idTelefone()));
 		entity.setEndereco(enderecoRepository.findById(usuarioDTO.idEndereco()));
 

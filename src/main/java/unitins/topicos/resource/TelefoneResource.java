@@ -2,11 +2,10 @@ package unitins.topicos.resource;
 
 import java.util.List;
 
-
-
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -16,8 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import com.oracle.svm.core.annotate.Delete;
 
 import unitins.topicos.application.Result;
 import unitins.topicos.dto.TelefoneDTO;
@@ -66,7 +63,7 @@ public class TelefoneResource {
 		}
 	}
 
-	@Delete
+	@DELETE
 	@Path("/{id}")
 	public Response delete(@PathParam("id") Long id) {
 		telefoneService.delete(id);
@@ -80,9 +77,9 @@ public class TelefoneResource {
 	}
 
 	@GET
-	@Path("/search/{nome}")
-	public List<TelefoneResponseDTO> search(@PathParam("nome") String nome) {
-		return telefoneService.findByNome(nome);
+	@Path("/search/{numero}")
+	public List<TelefoneResponseDTO> search(@PathParam("numero") String numero) {
+		return telefoneService.findByNumero(numero);
 
 	}
 }

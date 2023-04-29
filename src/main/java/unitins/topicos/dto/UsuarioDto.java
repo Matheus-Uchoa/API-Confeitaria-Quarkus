@@ -1,7 +1,7 @@
 package unitins.topicos.dto;
 
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public record UsuarioDTO(
@@ -13,8 +13,8 @@ public record UsuarioDTO(
 
 		@NotBlank(message = "O campo cpf deve ser informado.") @Size(max = 14, message = "O cpf deve posssuir no máximo 14 caracteres.") String cpf,
 
-		@NotBlank(message = "O campo de endereço deve ser informados") Long idEndereco,
-		@NotBlank(message = "O campo de telefone devem ser informados") Long idTelefone
+		@NotNull(message = "O campo de endereço deve ser informados") Long idEndereco,
+		@NotNull(message = "O campo de telefone devem ser informados") Long idTelefone
 
 ) {
 

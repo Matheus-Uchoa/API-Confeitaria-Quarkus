@@ -3,6 +3,7 @@ package unitins.topicos.resource;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,9 +14,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import unitins.topicos.application.Result;
 import unitins.topicos.dto.IngredienteDTO;
 import unitins.topicos.dto.IngredienteResponseDTO;
+
 import unitins.topicos.service.IngredienteService;
 
 @Path("/ingredientes")
@@ -38,8 +42,14 @@ public class IngredienteResource {
 	}
 
 	@POST
-	public IngredienteResponseDTO create(IngredienteDTO ingredienteDto) {
-		return ingredienteService.create(ingredienteDto);
+	public Response insert(IngredienteDTO dto) {
+		try {
+			IngredienteResponseDTO ingrediente = ingredienteService.create(dto);
+			return Response.status(Status.CREATED).entity(ingrediente).build();
+		} catch (ConstraintViolationException e) {
+			Result result = new Result(e.getConstraintViolations());
+			return Response.status(Status.NOT_FOUND).entity(result).build();
+		}
 	}
 
 	@PUT
@@ -56,7 +66,7 @@ public class IngredienteResource {
 	}
 
 	@GET
-	@Path("/nome/{nome}")
+	@Path("/search/{nome}")
 	public List<IngredienteResponseDTO> findByNome(@PathParam("nome") String nome) {
 		return ingredienteService.findByNome(nome);
 	}

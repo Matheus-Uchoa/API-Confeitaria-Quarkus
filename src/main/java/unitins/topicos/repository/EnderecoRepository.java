@@ -10,10 +10,10 @@ import unitins.topicos.entity.EnderecoEntity;
 @ApplicationScoped
 public class EnderecoRepository implements PanacheRepository<EnderecoEntity> {
 
-	public List<EnderecoEntity> findByNome(String nome) {
-		if (nome == null)
+	public List<EnderecoEntity> findByCep(String cep) {
+		if (cep == null)
 			return null;
-		return find("UPPER(nome) LIKE ?1 ", "%" + nome.toUpperCase() + "%").list();
+		return find("UPPER(cep) LIKE ?1 ", "%" + cep.toUpperCase() + "%").list();
 	}
 
 }

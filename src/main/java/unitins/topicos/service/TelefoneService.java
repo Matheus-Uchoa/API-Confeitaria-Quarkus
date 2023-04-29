@@ -15,9 +15,9 @@ import javax.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.TelefoneDTO;
 import unitins.topicos.dto.TelefoneResponseDTO;
-import unitins.topicos.dto.TelefoneResponseDTO;
+
 import unitins.topicos.entity.TelefoneEntity;
-import unitins.topicos.entity.TelefoneEntity;
+
 import unitins.topicos.repository.TelefoneRepository;
 
 @ApplicationScoped
@@ -77,8 +77,8 @@ public class TelefoneService {
 		telefoneRepository.deleteById(id);
 	}
 
-	public List<TelefoneResponseDTO> findByNome(String nome) {
-		List<TelefoneEntity> list = telefoneRepository.findByNome(nome);
+	public List<TelefoneResponseDTO> findByNumero(String numero) {
+		List<TelefoneEntity> list = telefoneRepository.findByNumero(numero);
 		return list.stream().map(TelefoneResponseDTO::new).collect(Collectors.toList());
 	}
 

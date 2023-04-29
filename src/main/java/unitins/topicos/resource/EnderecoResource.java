@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,10 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.oracle.svm.core.annotate.Delete;
-
 import unitins.topicos.application.Result;
-import unitins.topicos.dto.EnderecoResponseDTO;
 import unitins.topicos.dto.EnderecoDTO;
 import unitins.topicos.dto.EnderecoResponseDTO;
 import unitins.topicos.service.EnderecoService;
@@ -65,7 +63,7 @@ public class EnderecoResource {
 		}
 	}
 
-	@Delete
+	@DELETE
 	@Path("/{id}")
 	public Response delete(@PathParam("id") Long id) {
 		enderecoService.delete(id);
@@ -79,9 +77,9 @@ public class EnderecoResource {
 	}
 
 	@GET
-	@Path("/search/{nome}")
-	public List<EnderecoResponseDTO> search(@PathParam("nome") String nome) {
-		return enderecoService.findByNome(nome);
+	@Path("/search/{cep}")
+	public List<EnderecoResponseDTO> search(@PathParam("cep") String cep) {
+		return enderecoService.findByCep(cep);
 
 	}
 }

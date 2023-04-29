@@ -3,7 +3,7 @@ package unitins.topicos.dto;
 import unitins.topicos.entity.UsuarioEntity;
 
 public record UsuarioResponseDTO(
-
+Long id,
 		String nome,
 
 		String email, String senha,
@@ -12,7 +12,7 @@ public record UsuarioResponseDTO(
 
 ) {
 	public UsuarioResponseDTO(UsuarioEntity usuario) {
-		this(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf(), usuario.getEndereco().getId(),
+		this(usuario.getId(),usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getCpf(), usuario.getEndereco().getId(),
 				usuario.getTelefone().getId());
 	}
 

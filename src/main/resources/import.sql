@@ -51,7 +51,6 @@ INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Biscoito c
 INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Rocambole de nutella', 232, 'Rocambella', 12312123123);
 
 
-INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (1, 23, 1, 1);
-INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (2, 4, 2, 2);
-INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (3, 3, 3, 3);
-INSERT INTO public.confeitaria(categoria, peso, id, id_alergenico) VALUES (4, 2, 4, 4);
+
+
+

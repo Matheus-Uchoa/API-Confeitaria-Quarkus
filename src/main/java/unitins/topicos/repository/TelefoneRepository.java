@@ -11,10 +11,10 @@ import unitins.topicos.entity.TelefoneEntity;
 @ApplicationScoped
 public class TelefoneRepository implements PanacheRepository<TelefoneEntity> {
 
-	public List<TelefoneEntity> findByNome(String nome) {
-		if (nome == null)
+	public List<TelefoneEntity> findByNumero(String numero) {
+		if (numero == null)
 			return null;
-		return find("UPPER(nome) LIKE ?1 ", "%" + nome.toUpperCase() + "%").list();
+		return find("UPPER(numero) LIKE ?1 ", "%" + numero.toUpperCase() + "%").list();
 	}
 
 }
