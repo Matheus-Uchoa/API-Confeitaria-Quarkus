@@ -1,9 +1,8 @@
 package unitins.topicos.dto;
 
-import java.util.List;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record ConfeitariaDTO(@NotBlank(message = "O campo nome deve ser informado.") String nome,
 		@NotBlank(message = "O campo descrição deve ser informado.")
@@ -18,8 +17,11 @@ public record ConfeitariaDTO(@NotBlank(message = "O campo nome deve ser informad
 		@NotNull(message = "O campo idAlergenico deve ser informado.")
 
 		Long idAlergenico,
+		@NotNull(message = "O campo peso deve ser informado.")
 
-		Integer categoria,
-		List<IngredienteDTO> ingredientes) {
+		Double peso,
+
+		Integer categoria
+		) {
 
 }

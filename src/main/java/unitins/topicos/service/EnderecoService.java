@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validator;
-import javax.ws.rs.NotFoundException;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validator;
+import jakarta.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.EnderecoDTO;
 import unitins.topicos.dto.EnderecoResponseDTO;
@@ -56,7 +56,7 @@ public class EnderecoService {
 		entity.setNumero(enderecoDTO.numero());
 		entity.setComplemento(enderecoDTO.complemento());
 		entity.setCep(enderecoDTO.cep());
-		entity.setMunicipio(municipioRepository.findById(enderecoDTO.id_municipio()));
+		//entity.setMunicipio(municipioRepository.findById(enderecoDTO.id_municipio()));
 		enderecoRepository.persist(entity);
 
 		return new EnderecoResponseDTO(entity);
@@ -73,7 +73,7 @@ public class EnderecoService {
 		entity.setNumero(enderecoDTO.numero());
 		entity.setComplemento(enderecoDTO.complemento());
 		entity.setCep(enderecoDTO.cep());
-		entity.setMunicipio(municipioRepository.findById(enderecoDTO.id_municipio()));
+		//entity.setMunicipio(municipioRepository.findById(enderecoDTO.id_municipio()));
 
 		return new EnderecoResponseDTO(entity);
 	}

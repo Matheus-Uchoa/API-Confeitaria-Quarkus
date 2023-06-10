@@ -1,26 +1,34 @@
 package unitins.topicos.dto;
 
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
+import java.util.HashMap;
+import java.util.Map;
 import unitins.topicos.entity.Categoria;
 import unitins.topicos.entity.ConfeitariaEntity;
 
-public record ConfeitariaResponseDTO(String nome,
+public record ConfeitariaResponseDTO(long id,String nome,
 
 		String descricao,
 
 		Double preco, Integer estoque, @JsonInclude(JsonInclude.Include.NON_NULL) Categoria categoria,
-		Long idAlergenico, List<IngredienteResponseDTO> ingredientes
+		 Double peso,  Map<String, Object> alergenico, String nomeImagem
 
 ) {
 
 	public ConfeitariaResponseDTO(ConfeitariaEntity confeitaria) {
-		this(confeitaria.getNome(), confeitaria.getDescricao(), confeitaria.getPreco(), confeitaria.getEstoque(),
-				confeitaria.getCategoria(), confeitaria.getAlergenico().getId(),
-				confeitaria.getIngredientes().stream().map(IngredienteResponseDTO::new).collect(Collectors.toList()));
+		this(confeitaria.getId(),confeitaria.getNome(), confeitaria.getDescricao(), confeitaria.getPreco(), confeitaria.getEstoque(),
+				confeitaria.getCategoria(), confeitaria.getPeso(), verAlergenico(confeitaria.getAlergenico().getDescricao()),
+				confeitaria.getNomeImagem()
+				);
 	}
+	public static Map<String, Object> verAlergenico(String descricao) {
 
+		Map<String, Object> alergenico = new HashMap<>();
+
+		alergenico.put("descricao", descricao);
+
+		return alergenico;
+}
 }

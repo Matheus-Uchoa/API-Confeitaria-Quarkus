@@ -4,11 +4,19 @@
 
 
 
+insert into pessoa (nome) values('Immanuel Kant');
+insert into pessoa (nome) values('Martinho Lutero');
 
+insert into pessoafisica(id, cpf, sexo) values (1, '111.111.111-11', 1);
+insert into pessoafisica(id, cpf) values (2, '222.222.222-22');
 
+insert into usuario (login, senha, id_pessoa_fisica) values('ImmanuelKant', 'GU5e4piE62AOdQr2e5/r0In9A7OJ89TjYO0SxgzZysU5HyEtOo2uzOiH3xUqXEQXEWXQCTkB/LQeiS4m0bFs7w==', 1);
+insert into usuario (login, senha, id_pessoa_fisica) values('MartinhoLutero', '2jqHB2Uf9imuz2oRVlzQCEMTCOoHPgbnPCwXCm100JmUzMNhlZFMjcXoeWp9T91TTCruG2sL5JNYRvt6wtw2Ew==', 2);
+insert into perfis (id_usuario, perfil) values (1, 'Admin');
+insert into perfis (id_usuario, perfil) values (1, 'User');
+insert into perfis (id_usuario, perfil) values (2, 'User');
 
-
-
+ 
 insert into Estado (nome, sigla) values ('Tocantins','TO');
 insert into Estado (nome, sigla) values ('Goiás','GO');
 insert into Estado (nome, sigla) values ('São Paulo','SP');
@@ -30,10 +38,6 @@ insert into Telefone(codigoArea, numero) values('63','983617342');
 insert into Telefone(codigoArea, numero) values('74','934812347');
 insert into Telefone(codigoArea, numero) values('11','923741342');
 
-insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('tifu','tifu@email.com', '123', '123.321.23-08',1,4);
-insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('meive','meive@email.com', '321', '123.321.23-04',2,3);
-insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('Livia','livia@email.com', '2606', '123.331.23-08',3,2);
-insert into Usuario (nome, email,senha,cpf,id_endereco, id_telefone) values('Ledrus','ledrus@email.com', '234', '123.333.23-08',4,1);
 
 INSERT INTO alergenico(descricao) VALUES ('Láctose');
 INSERT INTO alergenico(descricao) VALUES ('Glúten');
@@ -50,7 +54,16 @@ INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Torta de l
 INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Biscoito com cobertura e gota de chocolate',54, 'Biscoito bom', 8);
 INSERT INTO public.produto( descricao, estoque, nome, preco) VALUES ('Rocambole de nutella', 232, 'Rocambella', 12312123123);
 
+INSERT INTO confeitaria(categoria, peso, id, id_alergenico) VALUES (1, 2.4, 1, 3);
+INSERT INTO confeitaria(categoria, peso, id, id_alergenico) VALUES (2, 4.5, 2, 4);
+INSERT INTO confeitaria(categoria, peso, id, id_alergenico) VALUES (3, 2.4, 3, 1);
+INSERT INTO confeitaria(categoria, peso, id, id_alergenico) VALUES (4, 2.4, 4, 2);
 
+INSERT INTO public.lista_desejo(
+	id_produto, id_usuario)
+	VALUES (2, 1);
+  INSERT INTO public.lista_desejo(
+	id_produto, id_usuario)
+	VALUES (1, 1);
 
-
-
+ 

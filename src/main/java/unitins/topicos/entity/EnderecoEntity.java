@@ -1,106 +1,82 @@
 package unitins.topicos.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Endereco")
-public class EnderecoEntity {
+public class EnderecoEntity extends DefaultEntity {
+    private boolean principal;
+    private String logradouro;
+    private String bairro;
+    private String numero;
+    private String complemento;
+    private String cep;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private UsuarioEntity usuario;
 
-	@Column(nullable = false)
-	private boolean principal;
+    @ManyToOne
+    @JoinColumn(name = "id_municipio")
+    private MunicipioEntity municipio;
 
-	@Column(nullable = false)
-	private String logradouro;
+    public MunicipioEntity getMunicipio() {
+        return municipio;
+    }
 
-	@Column(nullable = false)
-	private String bairro;
+    public void setMunicipio(MunicipioEntity municipio) {
+        this.municipio = municipio;
+    }
 
-	@Column(nullable = false)
-	private String numero;
+    public boolean isPrincipal() {
+        return principal;
+    }
 
-	@Column(nullable = false)
-	private String complemento;
+    public void setPrincipal(boolean principal) {
+        this.principal = principal;
+    }
 
-	@Column(nullable = false)
-	private String cep;
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	@ManyToOne
-	@JoinColumn(name = "id_municipio")
-	private MunicipioEntity municipio;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public boolean isPrincipal() {
-		return principal;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setPrincipal(boolean principal) {
-		this.principal = principal;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public String getLogradouro() {
-		return logradouro;
-	}
+    public String getComplemento() {
+        return complemento;
+    }
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public MunicipioEntity getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(MunicipioEntity endereco) {
-		this.municipio = endereco;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
 }

@@ -1,0 +1,117 @@
+
+
+
+@startuml
+
+    class Product {
+       - id: Long
+       - nome: String
+       - descricao: String
+       - preco: Double
+       - estoque: Integer
+       - alergenicos: List<String>
+       - peso: Double
+    }
+
+    enum Category {
+        - BOLO: int
+        - DOCE: int
+        - CUPCAKE: int
+        - BISCOITO: int
+        - SALGADO: int
+        - TORTA: int
+        - BEBIDA: int
+        
+    }
+
+    class User{
+        - id: Long
+        - nome: String 
+        - email: String
+        - senha: String 
+        - cpf: String 
+    }
+    class Ingrediente{
+ 		-id:long
+		-nome:String
+		-DataValdade: Date
+}
+    class Telephone {
+        - id: Long
+        - codigoArea: String
+        - numero: String
+    }
+
+    class Purchase {
+        - id: Long
+        - data: Date
+        - totalCompra: Double
+    }
+
+    class PurchaseItem {
+        - id: Long
+        - quantidade: Integer
+        - preco: Double
+    }
+
+    class Adress {
+        - id: Long
+        - principal: Boolean
+        - logradouro: String
+        - bairro: String 
+        - numero: String 
+        - complemento: String
+        - cep: String 
+        - municipio: String
+        - estado: String 
+    }
+    
+    class MetodoPagamento{
+    - statusPagamento: boolean
+    
+    }
+    class PagamentoCartaoCredito extends MetodoPagamento{
+    - numeroCartap: String
+    - dataValidade: Date
+    - bandeira : String
+    - titular: String
+    }
+    
+    
+    class PagamentoBoleto extends MetodoPagamento{
+    - codigoBarras: String
+    - dataVencimento: Date
+    - beneficiario: String
+    
+    }
+    class Avaliacao{
+    - pontuacao: int
+    - comentario: String
+    - data: Date
+    
+    }
+
+    Product "*" --> "1" Category
+    Product "1"-->"*" Avaliacao: produtoAvaliado
+    Product "*" --> "*" Ingrediente : ManyToMany
+    User "*" --> "*" Product: listaDesejo
+    User "1" *--> "1" Telephone: celular
+    User "1" *--> "1" Telephone: whatsapp
+    User "1" *--> "*" Adress
+    
+    User "1" --> "*"Avaliacao: clienteAvaliador
+    Purchase "1" *--> "*" PurchaseItem :OneToMany
+    Purchase "*" --> "1" User
+    Purchase "*"  --> "1" Adress
+    Purchase "1" --> "1" MetodoPagamento :OneToOne
+
+    PurchaseItem "*" --> "1" Product  : ManyToOne
+
+
+@enduml
+
+
+
+
+
+

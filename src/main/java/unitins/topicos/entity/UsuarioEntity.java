@@ -1,100 +1,124 @@
 package unitins.topicos.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Usuario")
-public class UsuarioEntity {
+public class UsuarioEntity extends DefaultEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    private String login;
+    private String senha;
+    private String nomeImagem;
 
-	@Column(nullable = false)
-	private String nome;
+    @ElementCollection
+    @CollectionTable(name = "perfis", joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id"))
+    @Column(name = "perfil", length = 30)
+    private Set<Perfil> perfis;
 
-	@Column(nullable = false)
-	private String email;
+    @OneToOne
+    @JoinColumn(name = "id_telefone", unique = true)
+    private TelefoneEntity telefone;
 
-	@Column(nullable = false)
-	private String senha;
 
-	@Column(nullable = false)
-	private String cpf;
 
-	@ManyToOne
-	@JoinColumn(name = "id_endereco")
-	private EnderecoEntity endereco;
+    @OneToOne(mappedBy = "usuario")
+    private EnderecoEntity endereco;
 
-	@OneToOne
-	@JoinColumn(name = "id_telefone")
-	private TelefoneEntity telefone;
+   
 
-	public TelefoneEntity getTelefone() {
-		return telefone;
-	}
+    @OneToOne
+    @JoinColumn(name = "id_pessoa_fisica", unique = true)
+    private PessoaFisica pessoaFisica;
 
-	public void setTelefone(TelefoneEntity telefone) {
-		this.telefone = telefone;
-	}
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToMany
+    @JoinTable(name = "lista_desejo", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_produto"))
+    private List<Produto> produto;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public String getNome() {
-		return nome;
-	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    
+    public List<Produto> getProduto() {
+        return produto;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setProduto(Produto produto) {
+        this.produto.add(produto) ;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public String getLogin() {
+        return login;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+   
+    public PessoaFisica getPessoaFisica() {
+        return pessoaFisica;
+    }
 
-	public EnderecoEntity getEndereco() {
-		return endereco;
-	}
+    public void setPessoaFisica(PessoaFisica pessoaFisica) {
+        this.pessoaFisica = pessoaFisica;
+    }
 
-	public void setEndereco(EnderecoEntity endereco) {
-		this.endereco = endereco;
-	}
+    public Set<Perfil> getPerfis() {
+        return perfis;
+    }
 
-	/*
-	 * @OneToOne
-	 */
+    public void setPerfis(Set<Perfil> perfis) {
+        this.perfis = perfis;
+    }
+
+   
+    public void addPerfis(Perfil perfis) {
+        if(this.perfis == null){
+            this.perfis = new HashSet<>();}
+
+        this.perfis.add(perfis);
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
+    }
+    public TelefoneEntity getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(TelefoneEntity telefone) {
+        this.telefone = telefone;
+    }
+
+    public EnderecoEntity getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoEntity endereco) {
+        this.endereco = endereco;
+    }
 }

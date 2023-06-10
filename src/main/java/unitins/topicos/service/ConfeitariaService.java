@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validator;
-import javax.ws.rs.NotFoundException;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validator;
+import jakarta.ws.rs.NotFoundException;
 
 import unitins.topicos.dto.ConfeitariaDTO;
 import unitins.topicos.dto.ConfeitariaResponseDTO;
+import unitins.topicos.entity.Categoria;
 import unitins.topicos.entity.ConfeitariaEntity;
-import unitins.topicos.repository.AlergenicoRepository;
 import unitins.topicos.repository.ConfeitariaRepository;
-import unitins.topicos.repository.IngredienteRepository;
+import unitins.topicos.repository.AlergenicoRepository;
 
 @ApplicationScoped
 public class ConfeitariaService {
@@ -25,12 +25,9 @@ public class ConfeitariaService {
 	@Inject
 	ConfeitariaRepository confeitariaRepository;
 	@Inject
-	IngredienteRepository ingredienteRepository;
+	Validator validator;
 	@Inject
 	AlergenicoRepository alergenicoRepository;
-
-	@Inject
-	Validator validator;
 
 	public List<ConfeitariaResponseDTO> getAll() {
 		List<ConfeitariaEntity> list = confeitariaRepository.listAll();
@@ -38,10 +35,10 @@ public class ConfeitariaService {
 	}
 
 	public ConfeitariaResponseDTO findById(Long id) {
-		ConfeitariaEntity produto = confeitariaRepository.findById(id);
-		if (produto == null)
-			throw new NotFoundException("Produto não encontrado.");
-		return new ConfeitariaResponseDTO(produto);
+		ConfeitariaEntity alergenico = confeitariaRepository.findById(id);
+		if (alergenico == null)
+			throw new NotFoundException("alergenico não encontrado.");
+		return new ConfeitariaResponseDTO(alergenico);
 	}
 
 	@Transactional
@@ -49,13 +46,13 @@ public class ConfeitariaService {
 		validar(confeitariaDTO);
 
 		ConfeitariaEntity entity = new ConfeitariaEntity();
-		entity.setNome(confeitariaDTO.nome());
 		entity.setDescricao(confeitariaDTO.descricao());
-		entity.setPreco(confeitariaDTO.preco());
-		entity.setEstoque(confeitariaDTO.estoque());
-		entity.setIngredientes(ingredienteRepository.findAllByIds(confeitariaDTO.ingredientes()));
+		entity.setNome(confeitariaDTO.nome());
 		entity.setAlergenico(alergenicoRepository.findById(confeitariaDTO.idAlergenico()));
-
+entity.setCategoria(Categoria.valueOf(confeitariaDTO.categoria()));
+entity.setEstoque(confeitariaDTO.estoque());
+entity.setPeso(confeitariaDTO.peso());
+entity.setPreco(confeitariaDTO.preco());
 		confeitariaRepository.persist(entity);
 
 		return new ConfeitariaResponseDTO(entity);
@@ -64,23 +61,22 @@ public class ConfeitariaService {
 	@Transactional
 	public ConfeitariaResponseDTO update(Long id, ConfeitariaDTO confeitariaDTO) throws ConstraintViolationException {
 		validar(confeitariaDTO);
+		ConfeitariaEntity entity = new ConfeitariaEntity();
 
-		ConfeitariaEntity entity = confeitariaRepository.findById(id);
-
-		entity.setNome(confeitariaDTO.nome());
 		entity.setDescricao(confeitariaDTO.descricao());
-		entity.setPreco(confeitariaDTO.preco());
-		entity.setEstoque(confeitariaDTO.estoque());
-		entity.setIngredientes(ingredienteRepository.findAllByIds(confeitariaDTO.ingredientes()));
+		entity.setNome(confeitariaDTO.nome());
 		entity.setAlergenico(alergenicoRepository.findById(confeitariaDTO.idAlergenico()));
-
+entity.setCategoria(Categoria.valueOf(confeitariaDTO.categoria()));
+entity.setEstoque(confeitariaDTO.estoque());
+entity.setPeso(confeitariaDTO.peso());
+entity.setPreco(confeitariaDTO.preco());
 		confeitariaRepository.persist(entity);
 
 		return new ConfeitariaResponseDTO(entity);
 	}
 
-	private void validar(ConfeitariaDTO ConfeitariaDTO) throws ConstraintViolationException {
-		Set<ConstraintViolation<ConfeitariaDTO>> violations = validator.validate(ConfeitariaDTO);
+	private void validar(ConfeitariaDTO confeitariaDTO) throws ConstraintViolationException {
+		Set<ConstraintViolation<ConfeitariaDTO>> violations = validator.validate(confeitariaDTO);
 		if (!violations.isEmpty())
 			throw new ConstraintViolationException(violations);
 
